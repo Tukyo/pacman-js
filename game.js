@@ -38,7 +38,7 @@ powerupImage.src = 'powerup.png';
 let powerupImage_1 = new Image();
 powerupImage_1.src = 'powerup_1.png';
 
-let ghostImages = ['jeet_1.png', 'jeet_2.png', 'jeet_3.png', 'jeet_4.png'];
+let ghostImages = ['enemy_1.png', 'enemy_2.png', 'enemy_3.png', 'enemy_4.png'];
 
 let createRect = (x, y, width, height, color) => {
     canvasContext.fillStyle = color;
