@@ -6,16 +6,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pacman</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body style="margin: 0; background-color: black;">
-    <canvas id="canvas" width="500" height="500"></canvas>
+    <div id="game_container">
+
+        <div id="start_game_box">
+            <h1>CARLO "THE GAME"</h1>
+            <p>Use the arrow keys or WASD to help Carlo get his asshole back! Don't let the jeets stop you!!</p>
+        </div>
+        <button id="start_game">START GAME</button>
+
+
+        <div id="game_over_box">
+            <h1>GAME OVER</h1>
+            <p>Score: <span id="game_over_score">0</span></p>
+        </div>
+        <button id="reset_game">RESTART GAME</button>
+
+        <canvas id="canvas" width="2000" height="2000"></canvas>
+    </div>
+
     <div style="display:none;">
         <img id="animation" src="animations.gif" width="140" height="20">
         <img id="ghosts" src="ghost.png" width="140" height="20">
     </div>
-    <script src="ghost.js"></script>
-    <script src="pacman.js"></script>
+
+    <script src="jeet.js"></script>
+    <script src="carlo.js"></script>
     <script src="game.js"></script>
 </body>
 

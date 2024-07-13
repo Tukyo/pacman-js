@@ -1,32 +1,21 @@
 class Ghost {
-    constructor(
-        x,
-        y,
-        width,
-        height,
-        speed,
-        imageX,
-        imageY,
-        imageWidth,
-        imageHeight,
-        range
-    ) {
+    constructor(x, y, width, height, speed, src, imageWidth, imageHeight, range) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.speed = speed;
         this.direction = DIRECTION_RIGHT;
-        this.imageX = imageX;
-        this.imageY = imageY;
-        this.imageHeight = imageHeight;
+        this.image = new Image();
+        this.image.src = src;
         this.imageWidth = imageWidth;
+        this.imageHeight = imageHeight;
         this.range = range;
         this.randomTargetIndex = parseInt(Math.random() * 4);
         this.target = randomTargetsForGhosts[this.randomTargetIndex];
         setInterval(() => {
             this.changeRandomDirection();
-        }, 10000);
+        }, 1000);
     }
 
     isInRange() {
@@ -147,7 +136,7 @@ class Ghost {
         } else {
             this.moveBackwards();
         }
-        console.log(this.direction);
+        // console.log(this.direction);
     }
 
     calculateNewDirection(map, destX, destY) {
@@ -252,27 +241,17 @@ class Ghost {
 
     draw() {
         canvasContext.save();
-        canvasContext.drawImage(
-            ghostFrames,
-            this.imageX,
-            this.imageY,
-            this.imageWidth,
-            this.imageHeight,
-            this.x,
-            this.y,
-            this.width,
-            this.height
-        );
+        canvasContext.drawImage(this.image, this.x, this.y, this.width, this.height);
         canvasContext.restore();
         canvasContext.beginPath();
-        canvasContext.strokeStyle = "red";
-        canvasContext.arc(
-            this.x + oneBlockSize / 2,
-            this.y + oneBlockSize / 2,
-            this.range * oneBlockSize,
-            0,
-            2 * Math.PI
-        );
+        // canvasContext.strokeStyle = "red";
+        // canvasContext.arc(
+        //     this.x + oneBlockSize / 2,
+        //     this.y + oneBlockSize / 2,
+        //     this.range * oneBlockSize,
+        //     0,
+        //     2 * Math.PI
+        // );
         canvasContext.stroke();
     }
 }

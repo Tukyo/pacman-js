@@ -26,13 +26,17 @@ class Pacman {
     eat() {
         for (let i = 0; i < map.length; i++) {
             for (let j = 0; j < map[0].length; j++) {
-                if (
-                    map[i][j] == 2 &&
-                    this.getMapX() == j &&
-                    this.getMapY() == i
-                ) {
-                    map[i][j] = 3;
-                    score++;
+                if (this.getMapX() == j && this.getMapY() == i) {
+                    if (map[i][j] == 2) {
+                        map[i][j] = 3; // Change the tile to indicate it's been eaten
+                        score++;
+                    } else if (map[i][j] == 5) {
+                        map[i][j] = 3;
+                        score += 5;
+                    } else if (map[i][j] == 6) {
+                        map[i][j] = 3;
+                        score += 5;
+                    }
                 }
             }
         }
@@ -76,16 +80,16 @@ class Pacman {
         let isCollided = false;
         if (
             map[parseInt(this.y / oneBlockSize)][
-                parseInt(this.x / oneBlockSize)
+            parseInt(this.x / oneBlockSize)
             ] == 1 ||
             map[parseInt(this.y / oneBlockSize + 0.9999)][
-                parseInt(this.x / oneBlockSize)
+            parseInt(this.x / oneBlockSize)
             ] == 1 ||
             map[parseInt(this.y / oneBlockSize)][
-                parseInt(this.x / oneBlockSize + 0.9999)
+            parseInt(this.x / oneBlockSize + 0.9999)
             ] == 1 ||
             map[parseInt(this.y / oneBlockSize + 0.9999)][
-                parseInt(this.x / oneBlockSize + 0.9999)
+            parseInt(this.x / oneBlockSize + 0.9999)
             ] == 1
         ) {
             isCollided = true;
@@ -147,15 +151,16 @@ class Pacman {
 
     draw() {
         canvasContext.save();
-        canvasContext.translate(
-            this.x + oneBlockSize / 2,
-            this.y + oneBlockSize / 2
-        );
-        canvasContext.rotate((this.direction * 90 * Math.PI) / 180);
-        canvasContext.translate(
-            -this.x - oneBlockSize / 2,
-            -this.y - oneBlockSize / 2
-        );
+        canvasContext.translate(this.x + oneBlockSize / 2, this.y + oneBlockSize / 2);
+
+        // Assuming direction 2 is left, and 0 is right. Adjust according to your direction definitions.
+        if (this.direction === 2) { // Mirror for left direction
+            canvasContext.scale(-1, 1);
+        } else if (this.direction === 0) { // Normal scale for right direction
+            canvasContext.scale(1, 1);
+        }
+
+        canvasContext.translate(-this.x - oneBlockSize / 2, -this.y - oneBlockSize / 2);
         canvasContext.drawImage(
             pacmanFrames,
             (this.currentFrame - 1) * oneBlockSize,
